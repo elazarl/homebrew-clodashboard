@@ -14,10 +14,18 @@ cask "clodashboard" do
   # there is no Python/uv/venv dependency.
   binary "clodashboard"
 
+  # The binary is unsigned/un-notarized, so a downloaded copy is quarantined and
+  # Gatekeeper blocks it ("Apple could not verify..."). Strip the quarantine flag
+  # on install so it runs. Replace this with proper Developer ID notarization once
+  # a signing identity is available.
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-dr", "com.apple.quarantine", "#{staged_path}/clodashboard"]
+  end
+
   caveats <<~EOS
-    clodashboard is an unsigned binary. If macOS Gatekeeper blocks it, either:
-      xattr -dr com.apple.quarantine "#{staged_path}/clodashboard"
-    or install with:
-      brew install --cask --no-quarantine clodashboard
+    clodashboard is an unsigned binary; this cask removes the macOS quarantine
+    flag on install. If Gatekeeper still blocks it, allow it once via
+    System Settings -> Privacy & Security -> "Open Anyway".
   EOS
 end
