@@ -1,9 +1,9 @@
 cask "clodashboard" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "0.1.0"
-  sha256 arm:   "c537a2b52a641effe6403568aa3536d880d0674a0841a54643af2ecb0f5c5758",
-         intel: "3719eea9d6f848c288cb124f23bb88490e9e660eb0d418a66d82a18424f6bf4f"
+  version "0.1.1"
+  sha256 arm:   "8043416bed69614ae794865aacdf93b80239198036aba2585868559588a3314c",
+         intel: "90fff9e8f8bcb891bc110c34911cdd943cf4a354eec80549b0c695c04bf37cab"
 
   url "https://github.com/elazarl/homebrew-clodashboard/releases/download/v#{version}/clodashboard-#{version}-#{arch}-apple-darwin.tar.gz"
   name "clodashboard"
